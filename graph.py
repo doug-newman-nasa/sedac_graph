@@ -64,8 +64,7 @@ with GraphDatabase.driver(URI, auth=AUTH) as driver:
                     
             #   Yes - increment download times
                 summary = driver.execute_query("""
-                        MATCH (a:User), (b:File) 
-                        WHERE a.id = $userId AND b.name = $name
+                        MATCH (a:User {id:$userId}), (b:File{name:$name})
                         MERGE (a)-[r:DOWNLOADED]->(b)
                         SET r.times = r.times + 1
                     """,
