@@ -9,7 +9,7 @@ Will delete the contents of a graph
 1. Install [Python 3](https://www.python.org/downloads/)
 2. Install neo4j python library
 ```pip3 install neo4j```
-3. Install [Neo4J desktop](https://neo4j.com/download/neo4j-desktop/?edition=desktop&flavour=osx&release=2.0.1&offline=false)
+3. Install [Neo4J desktop](https://neo4j.com/download/neo4j-desktop/)
 4. Run Neo4J desktop and create db instance
 5. Create auth_neo4j.py file
 ```AUTH = ('neo4j', '<your db password here>')```
