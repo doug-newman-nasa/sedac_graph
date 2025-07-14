@@ -30,33 +30,24 @@ with GraphDatabase.driver(URI, auth=AUTH) as driver:
             download = json.loads(line)
             # Extract user
             user_id = download['user_id']
-            # Does it exist?
             
-            if node_exists("User", "id", user_id):     
-                print('User exists')
-            else:
-                print ('User DOES NOT exits')
-                summary = driver.execute_query("""
-                    CREATE (a:User {id: $userID})
-                    """,
-                    userID=user_id,
-                    database_="neo4j",
-                ).summary
+            summary = driver.execute_query("""
+                MERGE (a:User {id: $userID})
+                """,
+                userID=user_id,
+                database_="neo4j",
+            ).summary
                 
             # Extract file
             file_name = download['message']['download']['object']
             file_size = download['message']['download']['size']
-            # Does it exist?
-            if node_exists("File", "name", file_name):     
-                print('File exists')
-            else:
-                print ('File DOES NOT exits')
-                summary = driver.execute_query("""
-                    CREATE (a:File {name: $fileName, size: $fileSize})
-                    """,
-                    fileName=file_name, fileSize=file_size,
-                    database_="neo4j",
-                ).summary
+            
+            summary = driver.execute_query("""
+                MERGE (a:File {name: $fileName, size: $fileSize})
+                """,
+                fileName=file_name, fileSize=file_size,
+                database_="neo4j",
+            ).summary
                 
             # Does the download edge exist?
             if relationship_exists(user_id, file_name):
