@@ -1,6 +1,6 @@
 # SEDAC downloads knowledge graph
 This repository contains two python scripts
-## Graph.py
+## graph.py
 Will convert a JSONL file into a graph describing users and the files they downloaded. Each line of the file describes a download.
 ## delete_graph.py
 Will delete the contents of a graph
